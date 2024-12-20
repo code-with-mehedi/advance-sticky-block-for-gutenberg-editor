@@ -75,26 +75,30 @@ const parseTopOffset = (value, parentElement) => {
 };
 window.addEventListener("scroll", () => {
   stickyElements.forEach(stickyElement => {
-    // Get the offset and dimensions of the sticky element
     const rect = stickyElement.getBoundingClientRect();
     const topOffset = parseTopOffset(stickyElement.getAttribute("data-top-offset"), stickyElement.parentElement) || 0;
     const sectionTop = rect.top + window.scrollY; // Convert to absolute scroll position
     const sectionBottom = sectionTop + stickyElement.offsetHeight;
-    const parentHeight = stickyElement.parentElement.offsetHeight;
-    const parentTop = stickyElement.parentElement.getBoundingClientRect().top + window.scrollY;
+    const parentElement = stickyElement.parentElement;
+    const parentRect = parentElement.getBoundingClientRect();
+    const parentTop = parentRect.top + window.scrollY;
+    const parentBottom = parentTop + parentElement.offsetHeight;
+    const stickyHeight = stickyElement.offsetHeight;
+    const scrollTop = window.scrollY;
 
-    // Check if the current scroll position is within the sticky range
-    if (window.scrollY + topOffset >= sectionTop && window.scrollY + topOffset < sectionBottom) {
-      stickyElement.classList.add("sticky");
-      stickyElement.style.position = "fixed";
-      stickyElement.style.top = `${topOffset}px`;
-      stickyElement.style.width = `${stickyElement.parentElement.offsetWidth}px`;
-    } else if (window.scrollY >= parentTop + parentHeight) {
-      // When scroll position exceeds the parent element's height, remove sticky
-      stickyElement.classList.remove("sticky");
-      stickyElement.style.position = "relative";
-      stickyElement.style.top = "0";
-      stickyElement.style.width = ""; // Reset the width
+    // Apply the logic for sticky behavior
+    if (scrollTop + topOffset >= sectionTop && scrollTop + topOffset + stickyHeight < parentBottom) {
+      console.log(topOffset);
+      stickyElement.style.position = 'fixed';
+      stickyElement.style.top = topOffset + 'px';
+      stickyElement.style.width = `${parentElement.offsetWidth}px`; // Ensure the width matches the parent
+    } else if (scrollTop + topOffset + stickyHeight >= parentBottom) {
+      stickyElement.style.position = 'absolute';
+      //stickyElement.style.top = `${parentElement.offsetHeight - stickyHeight}px`; // Align with the bottom of the parent
+    } else {
+      stickyElement.style.position = 'relative';
+      stickyElement.style.top = '0';
+      stickyElement.style.width = ''; // Reset width when not sticky
     }
   });
 });
