@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/advance-sticky-block-for-gutenberg-editor",
+  "version": "0.1.0",
+  "title": "Advance Sticky Block For Gutenberg Editor",
+  "category": "widgets",
+  "icon": "sticky",
+  "description": "Advance Sticky Block for Gutenberg editor",
+  "attributes": {
+    "topOffset": {
+      "type": "string",
+      "default": "20"
+    },
+    "topOffsetUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "tabletBreakpoint": {
+      "type": "number",
+      "default": 768
+    },
+    "mobileBreakpoint": {
+      "type": "number",
+      "default": 480
+    },
+    "offsetWidth": {
+      "type": "number",
+      "default": 100
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "textdomain": "advance-sticky-block-for-gutenberg-editor",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

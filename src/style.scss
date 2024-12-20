@@ -1,0 +1,19 @@
+[data-sticky="true"] {
+	position: relative;
+	z-index: 10;
+	transition: top 0.3s ease-in-out;
+}
+
+//[data-sticky="true"].fixed {
+//	width: 100%;
+//}
+//.sticky {
+//	position: fixed;
+//	top: 0;
+//	//width: 100%;
+//	z-index: 1000;
+//}
+.wp-block-create-block-advance-sticky-block-for-gutenberg-editor{
+	position: relative;
+	overflow: visible;
+}
