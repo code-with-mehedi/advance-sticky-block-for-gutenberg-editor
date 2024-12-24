@@ -11,5 +11,17 @@
   position: relative;
   overflow: visible;
 }
+@media (max-width: 1024px) {
+  .wp-block-create-block-advance-sticky-block-for-gutenberg-editor[data-sticky=true] {
+    /* Optional styling adjustments for tablets */
+    padding: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .wp-block-create-block-advance-sticky-block-for-gutenberg-editor[data-sticky=true] {
+    /* Optional styling adjustments for mobile */
+    padding: 5px;
+  }
+}
 
 /*# sourceMappingURL=style-index.css.map*/

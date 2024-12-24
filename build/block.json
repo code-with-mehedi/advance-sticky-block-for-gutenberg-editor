@@ -24,9 +24,21 @@
       "type": "number",
       "default": 480
     },
-    "offsetWidth": {
+    "topOffsetTablet": {
       "type": "number",
-      "default": 100
+      "default": 2
+    },
+    "topOffsetUnitTablet": {
+      "type": "string",
+      "default": "px"
+    },
+    "topOffsetMobile": {
+      "type": "number",
+      "default": 2
+    },
+    "topOffsetUnitMobile": {
+      "type": "string",
+      "default": "px"
     }
   },
   "supports": {

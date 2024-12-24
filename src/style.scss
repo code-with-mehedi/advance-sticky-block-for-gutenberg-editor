@@ -4,16 +4,23 @@
 	transition: top 0.3s ease-in-out;
 }
 
-//[data-sticky="true"].fixed {
-//	width: 100%;
-//}
-//.sticky {
-//	position: fixed;
-//	top: 0;
-//	//width: 100%;
-//	z-index: 1000;
-//}
-.wp-block-create-block-advance-sticky-block-for-gutenberg-editor{
+.wp-block-create-block-advance-sticky-block-for-gutenberg-editor {
 	position: relative;
 	overflow: visible;
+
+	// Styling for tablet view
+	@media (max-width: 1024px) {
+		&[data-sticky="true"] {
+			/* Optional styling adjustments for tablets */
+			padding: 10px;
+		}
+	}
+
+	// Styling for mobile view
+	@media (max-width: 768px) {
+		&[data-sticky="true"] {
+			/* Optional styling adjustments for mobile */
+			padding: 5px;
+		}
+	}
 }

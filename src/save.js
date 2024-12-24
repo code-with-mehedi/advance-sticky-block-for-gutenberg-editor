@@ -6,7 +6,10 @@ export default function Save({ attributes }) {
 		topOffsetUnit,
 		tabletBreakpoint,
 		mobileBreakpoint,
-		offsetWidth,
+		topOffsetTablet,
+		topOffsetUnitTablet,
+		topOffsetMobile,
+		topOffsetUnitMobile,
 	} = attributes;
 
 	const blockProps = useBlockProps.save();
@@ -15,12 +18,13 @@ export default function Save({ attributes }) {
 		<div
 			{...blockProps}
 			data-sticky="true"
-			data-top-offset={`${topOffset}${topOffsetUnit}`}
-			data-tablet-breakpoint={tabletBreakpoint}
-			data-mobile-breakpoint={mobileBreakpoint}
+			data-top-offset={`${topOffset}${topOffsetUnit}`} // Desktop offset
+			data-top-offset-tablet={`${topOffsetTablet}${topOffsetUnitTablet}`} // Tablet offset
+			data-top-offset-mobile={`${topOffsetMobile}${topOffsetUnitMobile}`} // Mobile offset
+			data-tablet-breakpoint={tabletBreakpoint} // Tablet breakpoint
+			data-mobile-breakpoint={mobileBreakpoint} // Mobile breakpoint
 			style={{
 				position: 'relative',
-				width: offsetWidth ? `${offsetWidth}%` : 'auto',
 			}}
 		>
 			<InnerBlocks.Content />

@@ -36,7 +36,10 @@ function Edit({
     topOffsetUnit,
     tabletBreakpoint,
     mobileBreakpoint,
-    offsetWidth
+    topOffsetUnitTablet,
+    topOffsetTablet,
+    topOffsetMobile,
+    topOffsetUnitMobile
   } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(() => {
@@ -52,7 +55,6 @@ function Edit({
         if (scrollTop >= parentTop + parseFloat(topOffset || 0) && scrollTop < parentTop + parentHeight - elementHeight) {
           stickyElement.style.position = 'fixed';
           stickyElement.style.top = topOffset + topOffsetUnit;
-          stickyElement.style.width = `${parent.offsetWidth}px`;
         } else {
           stickyElement.style.position = 'relative';
           stickyElement.style.top = 'auto';
@@ -99,6 +101,28 @@ function Edit({
           }),
           min: 480,
           max: 1024
+        }), "// add top offset for tablet", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Top Offset for Tablet', 'sticky-block'),
+          value: topOffsetTablet,
+          onChange: value => setAttributes({
+            topOffsetTablet: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Offset Unit for Tablet', 'sticky-block'),
+          value: topOffsetUnitTablet,
+          options: [{
+            label: 'Pixels (px)',
+            value: 'px'
+          }, {
+            label: 'Em',
+            value: 'em'
+          }, {
+            label: 'Percentage (%)',
+            value: '%'
+          }],
+          onChange: value => setAttributes({
+            topOffsetUnitTablet: value
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Mobile Breakpoint (px)', 'sticky-block'),
           value: mobileBreakpoint,
@@ -107,22 +131,35 @@ function Edit({
           }),
           min: 320,
           max: 479
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Offset Width (%)', 'sticky-block'),
-          value: offsetWidth,
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Top Offset for Mobile', 'sticky-block'),
+          value: topOffsetMobile,
           onChange: value => setAttributes({
-            offsetWidth: value
-          }),
-          min: 0,
-          max: 100
+            topOffsetMobile: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Offset Unit for Mobile', 'sticky-block'),
+          value: topOffsetUnitMobile,
+          options: [{
+            label: 'Pixels (px)',
+            value: 'px'
+          }, {
+            label: 'Em',
+            value: 'em'
+          }, {
+            label: 'Percentage (%)',
+            value: '%'
+          }],
+          onChange: value => setAttributes({
+            topOffsetUnitMobile: value
+          })
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       ...blockProps,
       "data-sticky": "true",
       style: {
-        position: 'relative',
-        width: offsetWidth ? `${offsetWidth}%` : 'auto'
+        position: 'relative'
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks, {})
     })]
@@ -190,18 +227,27 @@ function Save({
     topOffsetUnit,
     tabletBreakpoint,
     mobileBreakpoint,
-    offsetWidth
+    topOffsetTablet,
+    topOffsetUnitTablet,
+    topOffsetMobile,
+    topOffsetUnitMobile
   } = attributes;
   const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save();
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ...blockProps,
     "data-sticky": "true",
-    "data-top-offset": `${topOffset}${topOffsetUnit}`,
-    "data-tablet-breakpoint": tabletBreakpoint,
-    "data-mobile-breakpoint": mobileBreakpoint,
+    "data-top-offset": `${topOffset}${topOffsetUnit}` // Desktop offset
+    ,
+    "data-top-offset-tablet": `${topOffsetTablet}${topOffsetUnitTablet}` // Tablet offset
+    ,
+    "data-top-offset-mobile": `${topOffsetMobile}${topOffsetUnitMobile}` // Mobile offset
+    ,
+    "data-tablet-breakpoint": tabletBreakpoint // Tablet breakpoint
+    ,
+    "data-mobile-breakpoint": mobileBreakpoint // Mobile breakpoint
+    ,
     style: {
-      position: 'relative',
-      width: offsetWidth ? `${offsetWidth}%` : 'auto'
+      position: 'relative'
     },
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks.Content, {})
   });
@@ -287,7 +333,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/advance-sticky-block-for-gutenberg-editor","version":"0.1.0","title":"Advance Sticky Block For Gutenberg Editor","category":"widgets","icon":"sticky","description":"Advance Sticky Block for Gutenberg editor","attributes":{"topOffset":{"type":"string","default":"20"},"topOffsetUnit":{"type":"string","default":"px"},"tabletBreakpoint":{"type":"number","default":768},"mobileBreakpoint":{"type":"number","default":480},"offsetWidth":{"type":"number","default":100}},"supports":{"html":false},"textdomain":"advance-sticky-block-for-gutenberg-editor","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/advance-sticky-block-for-gutenberg-editor","version":"0.1.0","title":"Advance Sticky Block For Gutenberg Editor","category":"widgets","icon":"sticky","description":"Advance Sticky Block for Gutenberg editor","attributes":{"topOffset":{"type":"string","default":"20"},"topOffsetUnit":{"type":"string","default":"px"},"tabletBreakpoint":{"type":"number","default":768},"mobileBreakpoint":{"type":"number","default":480},"topOffsetTablet":{"type":"number","default":2},"topOffsetUnitTablet":{"type":"string","default":"px"},"topOffsetMobile":{"type":"number","default":2},"topOffsetUnitMobile":{"type":"string","default":"px"}},"supports":{"html":false},"textdomain":"advance-sticky-block-for-gutenberg-editor","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

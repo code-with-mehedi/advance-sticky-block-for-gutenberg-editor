@@ -19,7 +19,10 @@ export default function Edit({ attributes, setAttributes }) {
 		topOffsetUnit,
 		tabletBreakpoint,
 		mobileBreakpoint,
-		offsetWidth,
+		topOffsetUnitTablet,
+		topOffsetTablet,
+		topOffsetMobile,
+		topOffsetUnitMobile,
 	} = attributes;
 
 	const blockProps = useBlockProps();
@@ -42,7 +45,6 @@ export default function Edit({ attributes, setAttributes }) {
 				) {
 					stickyElement.style.position = 'fixed';
 					stickyElement.style.top = topOffset + topOffsetUnit;
-					stickyElement.style.width = `${parent.offsetWidth}px`;
 				} else {
 					stickyElement.style.position = 'relative';
 					stickyElement.style.top = 'auto';
@@ -83,6 +85,23 @@ export default function Edit({ attributes, setAttributes }) {
 						min={480}
 						max={1024}
 					/>
+					// add top offset for tablet
+					<TextControl
+						label={__('Top Offset for Tablet', 'sticky-block')}
+						value={topOffsetTablet}
+						onChange={(value) => setAttributes({ topOffsetTablet: value })}
+					/>
+					<SelectControl
+						label={__('Offset Unit for Tablet', 'sticky-block')}
+						value={topOffsetUnitTablet}
+						options={[
+							{ label: 'Pixels (px)', value: 'px' },
+							{ label: 'Em', value: 'em' },
+							{ label: 'Percentage (%)', value: '%' },
+						]}
+						onChange={(value) => setAttributes({ topOffsetUnitTablet: value })}
+					/>
+					
 					<RangeControl
 						label={__('Mobile Breakpoint (px)', 'sticky-block')}
 						value={mobileBreakpoint}
@@ -90,13 +109,22 @@ export default function Edit({ attributes, setAttributes }) {
 						min={320}
 						max={479}
 					/>
-					<RangeControl
-						label={__('Offset Width (%)', 'sticky-block')}
-						value={offsetWidth}
-						onChange={(value) => setAttributes({ offsetWidth: value })}
-						min={0}
-						max={100}
+					<TextControl
+						label={__('Top Offset for Mobile', 'sticky-block')}
+						value={topOffsetMobile}
+						onChange={(value) => setAttributes({ topOffsetMobile: value })}
 					/>
+					<SelectControl
+						label={__('Offset Unit for Mobile', 'sticky-block')}
+						value={topOffsetUnitMobile}
+						options={[
+							{ label: 'Pixels (px)', value: 'px' },
+							{ label: 'Em', value: 'em' },
+							{ label: 'Percentage (%)', value: '%' },
+						]}
+						onChange={(value) => setAttributes({ topOffsetUnitMobile: value })}
+					/>
+
 				</PanelBody>
 			</InspectorControls>
 			<div
@@ -104,7 +132,6 @@ export default function Edit({ attributes, setAttributes }) {
 				data-sticky="true"
 				style={{
 					position: 'relative',
-					width: offsetWidth ? `${offsetWidth}%` : 'auto',
 				}}
 			>
 				<InnerBlocks />
